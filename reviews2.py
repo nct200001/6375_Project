@@ -1,13 +1,13 @@
 from transformers import pipeline
 import torch
-
+#review put here rather than as argument when calling script in order to facilitate easy re-running for consistency testing
 model_id = "meta-llama/Llama-3.2-1B-Instruct"
 pipe = pipeline(
     "text-generation",
     model=model_id,
     device_map="auto",
 )
-messages = [
+messages = [#change system prompt to include (or not) explanation of review when desired
     {"role": "system", "content": """You are an advanced AI assistant created to perform sentiment analysis on reviews of college professors. I need you to analyze each review you receive and provide your analysis using the following csv format:
 [teaching_sentiment, difficulty_sentiment]
 teaching_sentiment = A floating-point representation of the sentiment of the review regarding the quality and effectiveness of teaching, rounded to two decimal places. Scale ranges from -1.0 (negative) to 1.0 (positive), where 0.0 represents neutral sentiment.
